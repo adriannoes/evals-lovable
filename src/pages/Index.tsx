@@ -1,24 +1,25 @@
-import { Bot, ClipboardCheck, TrendingUp, AlertTriangle } from "lucide-react";
+import { Layers, ClipboardCheck, TrendingUp, Clock, DollarSign, Users, ShoppingCart, Monitor, Scale } from "lucide-react";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { Header } from "@/components/layout/Header";
 import { MetricCard } from "@/components/dashboard/MetricCard";
-import { AgentCard } from "@/components/dashboard/AgentCard";
+import { TaxonomyCard } from "@/components/dashboard/TaxonomyCard";
 import { EvaluationTable } from "@/components/dashboard/EvaluationTable";
 import { ScoreChart } from "@/components/dashboard/ScoreChart";
-import { ProcessFilter } from "@/components/dashboard/ProcessFilter";
+import { TaxonomyFilter } from "@/components/dashboard/TaxonomyFilter";
 
 const metrics = [
-  { title: "Total Agents", value: "24", change: "+3", changeType: "positive" as const, icon: Bot, iconColor: "primary" as const },
-  { title: "Evaluations Today", value: "156", change: "+12%", changeType: "positive" as const, icon: ClipboardCheck, iconColor: "success" as const },
-  { title: "Avg. Score", value: "87%", change: "+2.4%", changeType: "positive" as const, icon: TrendingUp, iconColor: "accent" as const },
-  { title: "Issues Detected", value: "8", change: "-4", changeType: "positive" as const, icon: AlertTriangle, iconColor: "warning" as const },
+  { title: "Total Use Cases", value: "18", change: "+2", changeType: "positive" as const, icon: Layers, iconColor: "primary" as const },
+  { title: "Evaluations Today", value: "2,450", change: "+18%", changeType: "positive" as const, icon: ClipboardCheck, iconColor: "success" as const },
+  { title: "Avg. IDP Accuracy", value: "91%", change: "+2.4%", changeType: "positive" as const, icon: TrendingUp, iconColor: "accent" as const },
+  { title: "Time Saved", value: "89%", change: "+5%", changeType: "positive" as const, icon: Clock, iconColor: "warning" as const },
 ];
 
-const agents = [
-  { name: "Document Classifier", process: "Invoice Processing", score: 94, trend: "up" as const, evaluations: 45, lastEval: "2 min ago", status: "active" as const },
-  { name: "Data Extractor", process: "Employee Onboarding", score: 78, trend: "down" as const, evaluations: 32, lastEval: "15 min ago", status: "warning" as const },
-  { name: "Approval Bot", process: "Purchase Requests", score: 92, trend: "up" as const, evaluations: 28, lastEval: "1 hour ago", status: "active" as const },
-  { name: "Email Parser", process: "Support Tickets", score: 85, trend: "stable" as const, evaluations: 51, lastEval: "30 min ago", status: "active" as const },
+const taxonomies = [
+  { id: "finance", name: "Finance", icon: DollarSign, score: 92, trend: "up" as const, useCasesCount: 4, evaluationsToday: 45, topUseCase: "Invoice Processing", iconColor: "bg-emerald-500" },
+  { id: "hr", name: "Human Resources", icon: Users, score: 87, trend: "up" as const, useCasesCount: 4, evaluationsToday: 32, topUseCase: "Leave Requests", iconColor: "bg-blue-500" },
+  { id: "procurement", name: "Procurement", icon: ShoppingCart, score: 85, trend: "stable" as const, useCasesCount: 3, evaluationsToday: 28, topUseCase: "Purchase Orders", iconColor: "bg-purple-500" },
+  { id: "it", name: "IT", icon: Monitor, score: 90, trend: "up" as const, useCasesCount: 3, evaluationsToday: 51, topUseCase: "Ticket Triage", iconColor: "bg-cyan-500" },
+  { id: "legal", name: "Legal", icon: Scale, score: 83, trend: "down" as const, useCasesCount: 3, evaluationsToday: 20, topUseCase: "Contract Analysis", iconColor: "bg-amber-500" },
 ];
 
 const Index = () => {
@@ -45,22 +46,22 @@ const Index = () => {
               <ScoreChart />
             </div>
             
-            {/* Process Filter */}
-            <ProcessFilter />
+            {/* Taxonomy Filter */}
+            <TaxonomyFilter />
           </div>
 
-          {/* Agent Cards */}
+          {/* Taxonomy Cards */}
           <div className="mb-6">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h3 className="text-lg font-semibold text-foreground">AI Agents Performance</h3>
-                <p className="text-sm text-muted-foreground">Monitor your agents across all processes</p>
+                <h3 className="text-lg font-semibold text-foreground">Performance by Taxonomy</h3>
+                <p className="text-sm text-muted-foreground">Monitor AI capabilities across Pipefy use cases</p>
               </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-              {agents.map((agent, index) => (
-                <div key={agent.name} style={{ animationDelay: `${index * 0.1}s` }}>
-                  <AgentCard {...agent} />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
+              {taxonomies.map((taxonomy, index) => (
+                <div key={taxonomy.id} style={{ animationDelay: `${index * 0.1}s` }}>
+                  <TaxonomyCard {...taxonomy} />
                 </div>
               ))}
             </div>
