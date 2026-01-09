@@ -12,12 +12,15 @@ import {
   XCircle,
   AlertTriangle,
   ChevronDown,
-  ChevronRight
+  ChevronRight,
+  Play
 } from "lucide-react";
 import { useState } from "react";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { Header } from "@/components/layout/Header";
 import { MetricCard } from "@/components/dashboard/MetricCard";
+import { RunEvaluationModal } from "@/components/evaluation/RunEvaluationModal";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import {
   ChartContainer,
@@ -227,6 +230,16 @@ const UseCaseDetail = () => {
                 <p className="text-muted-foreground">{useCase.description}</p>
               </div>
               <div className="flex items-center gap-4">
+                <RunEvaluationModal
+                  defaultTaxonomy={taxonomyId}
+                  defaultUseCase={useCase.name}
+                  trigger={
+                    <Button className="gap-2">
+                      <Play className="h-4 w-4" />
+                      Run Evaluation
+                    </Button>
+                  }
+                />
                 <div className="text-right">
                   <p className="text-sm text-muted-foreground">Overall Score</p>
                   <div className="flex items-center gap-2">
