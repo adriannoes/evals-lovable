@@ -1,4 +1,4 @@
-import { Layers, ClipboardCheck, TrendingUp, Clock, DollarSign, Users, ShoppingCart, Monitor, Scale } from "lucide-react";
+import { Layers, ClipboardCheck, TrendingUp, Clock, DollarSign, Users, ShoppingCart, Monitor, Scale, Play } from "lucide-react";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { Header } from "@/components/layout/Header";
 import { MetricCard } from "@/components/dashboard/MetricCard";
@@ -6,6 +6,8 @@ import { TaxonomyCard } from "@/components/dashboard/TaxonomyCard";
 import { EvaluationTable } from "@/components/dashboard/EvaluationTable";
 import { ScoreChart } from "@/components/dashboard/ScoreChart";
 import { TaxonomyFilter } from "@/components/dashboard/TaxonomyFilter";
+import { RunEvaluationModal } from "@/components/evaluation/RunEvaluationModal";
+import { Button } from "@/components/ui/button";
 
 const metrics = [
   { title: "Total Use Cases", value: "18", change: "+2", changeType: "positive" as const, icon: Layers, iconColor: "primary" as const },
@@ -57,6 +59,14 @@ const Index = () => {
                 <h3 className="text-lg font-semibold text-foreground">Performance by Taxonomy</h3>
                 <p className="text-sm text-muted-foreground">Monitor AI capabilities across Pipefy use cases</p>
               </div>
+              <RunEvaluationModal
+                trigger={
+                  <Button className="gap-2">
+                    <Play className="h-4 w-4" />
+                    Run Evaluation
+                  </Button>
+                }
+              />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
               {taxonomies.map((taxonomy, index) => (
