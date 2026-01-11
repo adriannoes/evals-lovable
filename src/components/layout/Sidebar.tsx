@@ -10,7 +10,8 @@ import {
   Scale,
   ChevronDown,
   ChevronRight,
-  Layers
+  Layers,
+  GitCompare
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
@@ -27,6 +28,7 @@ const taxonomies = [
 const navigation = [
   { name: "Dashboard", icon: LayoutDashboard, href: "/" },
   { name: "Taxonomies", icon: Layers, href: null, hasSubmenu: true },
+  { name: "Comparison", icon: GitCompare, href: "/comparison" },
   { name: "Evaluations", icon: ClipboardList, href: "/evaluations" },
   { name: "Analytics", icon: TrendingUp, href: "/analytics" },
   { name: "Settings", icon: Settings, href: "/settings" },
