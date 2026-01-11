@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import TaxonomyDetail from "./pages/TaxonomyDetail";
 import UseCaseDetail from "./pages/UseCaseDetail";
+import Comparison from "./pages/Comparison";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -20,6 +21,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/taxonomy/:taxonomyId" element={<TaxonomyDetail />} />
           <Route path="/taxonomy/:taxonomyId/use-case/:useCaseId" element={<UseCaseDetail />} />
+          <Route path="/comparison" element={<Comparison />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
