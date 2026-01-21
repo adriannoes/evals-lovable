@@ -19,7 +19,11 @@ import {
   PolarAngleAxis,
   PolarRadiusAxis,
   Radar,
-  Legend
+  Legend,
+  LineChart,
+  Line,
+  Area,
+  AreaChart
 } from "recharts";
 import { 
   DollarSign, 
@@ -84,8 +88,8 @@ const useCasesData: UseCaseData[] = [
 ];
 
 const TrendIndicator = ({ value }: { value: number }) => {
-  if (value > 0) return <span className="flex items-center text-emerald-500 text-sm"><ArrowUp className="h-3 w-3" />+{value}%</span>;
-  if (value < 0) return <span className="flex items-center text-red-500 text-sm"><ArrowDown className="h-3 w-3" />{value}%</span>;
+  if (value > 0) return <span className="flex items-center text-chart-2 text-sm"><ArrowUp className="h-3 w-3" />+{value}%</span>;
+  if (value < 0) return <span className="flex items-center text-destructive text-sm"><ArrowDown className="h-3 w-3" />{value}%</span>;
   return <span className="flex items-center text-muted-foreground text-sm"><Minus className="h-3 w-3" />0%</span>;
 };
 
@@ -157,7 +161,49 @@ export default function Comparison() {
     });
   };
 
-  const colors = ["hsl(var(--primary))", "hsl(var(--chart-2))", "hsl(var(--chart-3))", "hsl(var(--chart-4))", "hsl(var(--chart-5))"];
+const colors = ["hsl(var(--primary))", "hsl(var(--chart-2))", "hsl(var(--chart-3))", "hsl(var(--chart-4))", "hsl(var(--chart-5))"];
+
+  // Historical trend data for each item
+  const historicalData = [
+    { period: "Week 1", finance: 88, hr: 82, procurement: 85, it: 87, legal: 78 },
+    { period: "Week 2", finance: 89, hr: 83, procurement: 86, it: 88, legal: 80 },
+    { period: "Week 3", finance: 90, hr: 84, procurement: 87, it: 89, legal: 81 },
+    { period: "Week 4", finance: 91, hr: 85, procurement: 88, it: 90, legal: 82 },
+    { period: "Week 5", finance: 90, hr: 86, procurement: 87, it: 89, legal: 83 },
+    { period: "Week 6", finance: 91, hr: 85, procurement: 88, it: 90, legal: 84 },
+    { period: "Week 7", finance: 92, hr: 87, procurement: 89, it: 91, legal: 85 },
+    { period: "Week 8", finance: 92, hr: 87, procurement: 89, it: 91, legal: 85 },
+  ];
+
+  const useCaseHistoricalData = [
+    { period: "Week 1", "invoice-processing": 90, "expense-claims": 87, "credit-analysis": 84, "candidate-screening": 83, "employee-onboarding": 82, "vendor-onboarding": 86, "purchase-requests": 84, "ticket-resolution": 88, "contract-review": 79 },
+    { period: "Week 2", "invoice-processing": 91, "expense-claims": 88, "credit-analysis": 85, "candidate-screening": 84, "employee-onboarding": 83, "vendor-onboarding": 87, "purchase-requests": 85, "ticket-resolution": 89, "contract-review": 80 },
+    { period: "Week 3", "invoice-processing": 92, "expense-claims": 89, "credit-analysis": 86, "candidate-screening": 85, "employee-onboarding": 84, "vendor-onboarding": 88, "purchase-requests": 86, "ticket-resolution": 90, "contract-review": 82 },
+    { period: "Week 4", "invoice-processing": 93, "expense-claims": 90, "credit-analysis": 87, "candidate-screening": 86, "employee-onboarding": 85, "vendor-onboarding": 89, "purchase-requests": 87, "ticket-resolution": 91, "contract-review": 83 },
+    { period: "Week 5", "invoice-processing": 92, "expense-claims": 89, "credit-analysis": 88, "candidate-screening": 87, "employee-onboarding": 84, "vendor-onboarding": 88, "purchase-requests": 86, "ticket-resolution": 90, "contract-review": 84 },
+    { period: "Week 6", "invoice-processing": 93, "expense-claims": 90, "credit-analysis": 88, "candidate-screening": 87, "employee-onboarding": 85, "vendor-onboarding": 89, "purchase-requests": 87, "ticket-resolution": 91, "contract-review": 85 },
+    { period: "Week 7", "invoice-processing": 94, "expense-claims": 91, "credit-analysis": 89, "candidate-screening": 88, "employee-onboarding": 86, "vendor-onboarding": 90, "purchase-requests": 88, "ticket-resolution": 92, "contract-review": 86 },
+    { period: "Week 8", "invoice-processing": 94, "expense-claims": 91, "credit-analysis": 89, "candidate-screening": 88, "employee-onboarding": 86, "vendor-onboarding": 90, "purchase-requests": 88, "ticket-resolution": 92, "contract-review": 86 },
+  ];
+
+  const getHistoricalTrendData = () => {
+    if (comparisonType === "taxonomies") {
+      return historicalData.map(row => {
+        const filtered: Record<string, string | number> = { period: row.period };
+        selectedTaxonomyData.forEach(t => {
+          filtered[t.name] = row[t.id as keyof typeof row] as number;
+        });
+        return filtered;
+      });
+    }
+    return useCaseHistoricalData.map(row => {
+      const filtered: Record<string, string | number> = { period: row.period };
+      selectedUseCaseData.forEach(u => {
+        filtered[u.name] = row[u.id as keyof typeof row] as number;
+      });
+      return filtered;
+    });
+  };
 
   return (
     <div className="min-h-screen bg-background flex">
@@ -426,6 +472,73 @@ export default function Comparison() {
                       </CardContent>
                     </Card>
                   </div>
+
+                  {/* Historical Trend Chart */}
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Historical Performance Trends</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="h-[350px]">
+                        <ResponsiveContainer width="100%" height="100%">
+                          <AreaChart data={getHistoricalTrendData()}>
+                            <defs>
+                              {(comparisonType === "taxonomies" ? selectedTaxonomyData : selectedUseCaseData).map((item, index) => (
+                                <linearGradient key={item.id} id={`gradient-${item.id}`} x1="0" y1="0" x2="0" y2="1">
+                                  <stop offset="5%" stopColor={colors[index % colors.length]} stopOpacity={0.3} />
+                                  <stop offset="95%" stopColor={colors[index % colors.length]} stopOpacity={0} />
+                                </linearGradient>
+                              ))}
+                            </defs>
+                            <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" vertical={false} />
+                            <XAxis 
+                              dataKey="period" 
+                              stroke="hsl(var(--muted-foreground))" 
+                              axisLine={false}
+                              tickLine={false}
+                            />
+                            <YAxis 
+                              domain={[70, 100]} 
+                              stroke="hsl(var(--muted-foreground))" 
+                              axisLine={false}
+                              tickLine={false}
+                            />
+                            <Tooltip 
+                              contentStyle={{ 
+                                backgroundColor: "hsl(var(--card))", 
+                                border: "1px solid hsl(var(--border))",
+                                borderRadius: "8px"
+                              }} 
+                            />
+                            <Legend />
+                            {comparisonType === "taxonomies" ? (
+                              selectedTaxonomyData.map((t, index) => (
+                                <Area
+                                  key={t.id}
+                                  type="monotone"
+                                  dataKey={t.name}
+                                  stroke={colors[index % colors.length]}
+                                  strokeWidth={2}
+                                  fill={`url(#gradient-${t.id})`}
+                                />
+                              ))
+                            ) : (
+                              selectedUseCaseData.map((u, index) => (
+                                <Area
+                                  key={u.id}
+                                  type="monotone"
+                                  dataKey={u.name}
+                                  stroke={colors[index % colors.length]}
+                                  strokeWidth={2}
+                                  fill={`url(#gradient-${u.id})`}
+                                />
+                              ))
+                            )}
+                          </AreaChart>
+                        </ResponsiveContainer>
+                      </div>
+                    </CardContent>
+                  </Card>
                 </div>
               </div>
             </Tabs>
