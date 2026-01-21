@@ -1,21 +1,19 @@
-import { 
-  LayoutDashboard, 
-  ClipboardList, 
-  Settings, 
-  TrendingUp,
+import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import {
+  LayoutDashboard,
+  Layers,
+  ChevronDown,
   DollarSign,
   Users,
   ShoppingCart,
   Monitor,
   Scale,
-  ChevronDown,
-  ChevronRight,
-  Layers,
-  GitCompare
+  Settings,
+  HelpCircle,
+  GitCompare,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
 
 const taxonomies = [
   { id: "finance", name: "Finance", icon: DollarSign },
@@ -26,17 +24,14 @@ const taxonomies = [
 ];
 
 const navigation = [
-  { name: "Dashboard", icon: LayoutDashboard, href: "/" },
+  { name: "Dashboard", icon: LayoutDashboard, href: "/", hasSubmenu: false },
   { name: "Taxonomies", icon: Layers, href: null, hasSubmenu: true },
-  { name: "Comparison", icon: GitCompare, href: "/comparison" },
-  { name: "Evaluations", icon: ClipboardList, href: "/evaluations" },
-  { name: "Analytics", icon: TrendingUp, href: "/analytics" },
-  { name: "Settings", icon: Settings, href: "/settings" },
+  { name: "Comparison", icon: GitCompare, href: "/comparison", hasSubmenu: false },
 ];
 
 export function Sidebar() {
-  const [taxonomiesOpen, setTaxonomiesOpen] = useState(true);
   const location = useLocation();
+  const [taxonomiesOpen, setTaxonomiesOpen] = useState(true);
 
   const isActive = (href: string | null) => {
     if (!href) return false;
@@ -44,25 +39,29 @@ export function Sidebar() {
   };
 
   const isTaxonomyActive = (id: string) => {
-    return location.pathname.startsWith(`/taxonomy/${id}`);
+    return location.pathname.includes(`/taxonomy/${id}`);
   };
 
+  const isAnyTaxonomyActive = taxonomies.some((t) => isTaxonomyActive(t.id));
+
   return (
-    <aside className="fixed left-0 top-0 z-40 h-screen w-64 bg-sidebar border-r border-sidebar-border">
+    <aside className="fixed left-0 top-0 z-40 h-screen w-64 border-r border-sidebar-border bg-sidebar">
       <div className="flex h-full flex-col">
         {/* Logo */}
-        <div className="flex h-16 items-center gap-3 px-6 border-b border-sidebar-border">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg gradient-primary">
-            <Layers className="h-5 w-5 text-primary-foreground" />
-          </div>
-          <div>
-            <h1 className="text-lg font-bold text-sidebar-foreground">AI Evals</h1>
-            <p className="text-xs text-sidebar-foreground/60">by Pipefy</p>
+        <div className="flex h-16 items-center border-b border-sidebar-border px-6">
+          <div className="flex items-center gap-3">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
+              <span className="text-lg font-bold text-primary-foreground">P</span>
+            </div>
+            <div>
+              <h1 className="text-lg font-semibold text-sidebar-foreground">AI Evals</h1>
+              <p className="text-xs text-muted-foreground">by Pipefy</p>
+            </div>
           </div>
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 space-y-1 px-3 py-4 overflow-y-auto">
+        <nav className="flex-1 space-y-1 px-3 py-4">
           {navigation.map((item) => (
             <div key={item.name}>
               {item.hasSubmenu ? (
@@ -70,34 +69,34 @@ export function Sidebar() {
                   <button
                     onClick={() => setTaxonomiesOpen(!taxonomiesOpen)}
                     className={cn(
-                      "flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200",
-                      taxonomiesOpen
-                        ? "bg-sidebar-accent text-sidebar-primary"
-                        : "text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground"
+                      "flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+                      isAnyTaxonomyActive
+                        ? "bg-sidebar-accent text-primary"
+                        : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                     )}
                   >
                     <div className="flex items-center gap-3">
                       <item.icon className="h-5 w-5" />
                       {item.name}
                     </div>
-                    {taxonomiesOpen ? (
-                      <ChevronDown className="h-4 w-4" />
-                    ) : (
-                      <ChevronRight className="h-4 w-4" />
-                    )}
+                    <ChevronDown
+                      className={cn(
+                        "h-4 w-4 transition-transform duration-200",
+                        taxonomiesOpen && "rotate-180"
+                      )}
+                    />
                   </button>
-                  
                   {taxonomiesOpen && (
-                    <div className="ml-4 mt-1 space-y-1 border-l border-sidebar-border pl-3">
+                    <div className="mt-1 space-y-1 pl-4">
                       {taxonomies.map((taxonomy) => (
                         <Link
                           key={taxonomy.id}
                           to={`/taxonomy/${taxonomy.id}`}
                           className={cn(
-                            "flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition-all duration-200",
+                            "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors",
                             isTaxonomyActive(taxonomy.id)
-                              ? "bg-primary/10 text-primary font-medium"
-                              : "text-sidebar-foreground/60 hover:bg-sidebar-accent hover:text-sidebar-foreground"
+                              ? "bg-primary/10 text-primary font-medium border-l-2 border-primary -ml-[2px] pl-[14px]"
+                              : "text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                           )}
                         >
                           <taxonomy.icon className="h-4 w-4" />
@@ -111,10 +110,10 @@ export function Sidebar() {
                 <Link
                   to={item.href || "/"}
                   className={cn(
-                    "flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200",
+                    "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
                     isActive(item.href)
-                      ? "bg-sidebar-accent text-sidebar-primary"
-                      : "text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground"
+                      ? "bg-primary/10 text-primary border-l-2 border-primary -ml-[2px] pl-[14px]"
+                      : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                   )}
                 >
                   <item.icon className="h-5 w-5" />
@@ -125,15 +124,33 @@ export function Sidebar() {
           ))}
         </nav>
 
-        {/* User section */}
+        {/* Bottom Section */}
+        <div className="border-t border-sidebar-border p-3">
+          <Link
+            to="/settings"
+            className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
+          >
+            <Settings className="h-5 w-5" />
+            Settings
+          </Link>
+          <Link
+            to="/help"
+            className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
+          >
+            <HelpCircle className="h-5 w-5" />
+            Help & Support
+          </Link>
+        </div>
+
+        {/* User */}
         <div className="border-t border-sidebar-border p-4">
-          <div className="flex items-center gap-3 rounded-lg bg-sidebar-accent p-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/20 text-sidebar-primary font-semibold text-sm">
+          <div className="flex items-center gap-3">
+            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-sm font-medium text-primary-foreground">
               JD
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-sm font-medium text-sidebar-foreground truncate">John Doe</p>
-              <p className="text-xs text-sidebar-foreground/60 truncate">Admin</p>
+              <p className="text-xs text-muted-foreground truncate">Admin</p>
             </div>
           </div>
         </div>

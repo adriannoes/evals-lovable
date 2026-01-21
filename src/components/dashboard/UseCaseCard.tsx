@@ -65,24 +65,24 @@ export function UseCaseCard({
   return (
     <Link
       to={`/taxonomy/${taxonomyId}/use-case/${id}`}
-      className="group block rounded-xl border border-border bg-card p-5 shadow-card hover:shadow-card-hover transition-all duration-300 hover:border-primary/30"
+      className="group block rounded-lg border border-border bg-card p-4 shadow-card hover:shadow-card-hover transition-all duration-200 hover:border-primary/40"
     >
-      <div className="flex items-start justify-between mb-3">
-        <h3 className="text-base font-semibold text-foreground">{name}</h3>
+      <div className="flex items-start justify-between mb-2">
+        <h3 className="text-sm font-semibold text-foreground font-sans">{name}</h3>
         <div className="flex items-center gap-1">
-          <TrendIcon className={cn("h-4 w-4", trendColors[trend])} />
+          <TrendIcon className={cn("h-3.5 w-3.5", trendColors[trend])} />
         </div>
       </div>
 
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
           <span className={cn(
-            "text-3xl font-bold",
+            "text-2xl font-bold font-sans",
             score >= 90 ? "text-success" : score >= 70 ? "text-warning" : "text-destructive"
           )}>
             {score}%
           </span>
-          <div className="h-8 w-1 rounded-full bg-muted overflow-hidden">
+          <div className="h-6 w-1 rounded-full bg-muted overflow-hidden">
             <div
               className={cn(
                 "w-full transition-all duration-500",
@@ -93,18 +93,18 @@ export function UseCaseCard({
           </div>
         </div>
         <div className="text-right">
-          <p className="text-sm font-medium text-foreground">{evaluations} evals</p>
+          <p className="text-xs font-medium text-foreground">{evaluations} evals</p>
           <p className="text-xs text-muted-foreground">{lastEval}</p>
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-2 mb-4">
+      <div className="flex flex-wrap gap-1.5 mb-3">
         <CapabilityBadge icon={FileText} label="IDP" score={capabilities.docReader} />
         <CapabilityBadge icon={Brain} label="Agent" score={capabilities.agent} />
         <CapabilityBadge icon={MessageSquare} label="Assist" score={capabilities.assistant} />
       </div>
 
-      <div className="flex items-center justify-end pt-3 border-t border-border">
+      <div className="flex items-center justify-end pt-2 border-t border-border">
         <div className="flex items-center gap-1 text-primary opacity-0 group-hover:opacity-100 transition-opacity">
           <span className="text-xs font-medium">View Details</span>
           <ArrowRight className="h-3 w-3" />

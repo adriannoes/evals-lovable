@@ -17,11 +17,11 @@ const metrics = [
 ];
 
 const taxonomies = [
-  { id: "finance", name: "Finance", icon: DollarSign, score: 92, trend: "up" as const, useCasesCount: 4, evaluationsToday: 45, topUseCase: "Invoice Processing", iconColor: "bg-emerald-500" },
-  { id: "hr", name: "Human Resources", icon: Users, score: 87, trend: "up" as const, useCasesCount: 4, evaluationsToday: 32, topUseCase: "Leave Requests", iconColor: "bg-blue-500" },
-  { id: "procurement", name: "Procurement", icon: ShoppingCart, score: 85, trend: "stable" as const, useCasesCount: 3, evaluationsToday: 28, topUseCase: "Purchase Orders", iconColor: "bg-purple-500" },
-  { id: "it", name: "IT", icon: Monitor, score: 90, trend: "up" as const, useCasesCount: 3, evaluationsToday: 51, topUseCase: "Ticket Triage", iconColor: "bg-cyan-500" },
-  { id: "legal", name: "Legal", icon: Scale, score: 83, trend: "down" as const, useCasesCount: 3, evaluationsToday: 20, topUseCase: "Contract Analysis", iconColor: "bg-amber-500" },
+  { id: "finance", name: "Finance", icon: DollarSign, score: 92, trend: "up" as const, useCasesCount: 4, evaluationsToday: 45, topUseCase: "Invoice Processing", iconColor: "bg-primary" },
+  { id: "hr", name: "Human Resources", icon: Users, score: 87, trend: "up" as const, useCasesCount: 4, evaluationsToday: 32, topUseCase: "Leave Requests", iconColor: "bg-accent" },
+  { id: "procurement", name: "Procurement", icon: ShoppingCart, score: 85, trend: "stable" as const, useCasesCount: 3, evaluationsToday: 28, topUseCase: "Purchase Orders", iconColor: "bg-chart-5" },
+  { id: "it", name: "IT", icon: Monitor, score: 90, trend: "up" as const, useCasesCount: 3, evaluationsToday: 51, topUseCase: "Ticket Triage", iconColor: "bg-success" },
+  { id: "legal", name: "Legal", icon: Scale, score: 83, trend: "down" as const, useCasesCount: 3, evaluationsToday: 20, topUseCase: "Contract Analysis", iconColor: "bg-warning" },
 ];
 
 const Index = () => {

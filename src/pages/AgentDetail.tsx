@@ -105,7 +105,7 @@ const AgentDetail = () => {
 
             <div className="flex items-center gap-3">
               <Button variant="outline">Configure</Button>
-              <Button variant="gradient">Run Evaluation</Button>
+              <Button>Run Evaluation</Button>
             </div>
           </div>
 

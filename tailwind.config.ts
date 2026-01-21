@@ -15,6 +15,8 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
+        serif: ['"Source Serif 4"', 'Georgia', 'serif'],
+        display: ['"Source Serif 4"', 'Georgia', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -68,11 +70,23 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        chart: {
+          "1": "hsl(var(--chart-1))",
+          "2": "hsl(var(--chart-2))",
+          "3": "hsl(var(--chart-3))",
+          "4": "hsl(var(--chart-4))",
+          "5": "hsl(var(--chart-5))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      boxShadow: {
+        'card': '0 1px 3px hsla(222, 47%, 11%, 0.08), 0 1px 2px hsla(222, 47%, 11%, 0.04)',
+        'card-hover': '0 4px 12px hsla(220, 70%, 53%, 0.12)',
+        'elevated': '0 4px 6px -1px hsla(222, 47%, 11%, 0.08), 0 2px 4px -2px hsla(222, 47%, 11%, 0.04)',
       },
       keyframes: {
         "accordion-down": {
