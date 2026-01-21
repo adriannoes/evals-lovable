@@ -3,9 +3,9 @@ import { Button } from "@/components/ui/button";
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-border bg-card/80 backdrop-blur-sm px-6">
+    <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-border bg-card px-6">
       <div className="flex items-center gap-4">
-        <h2 className="text-xl font-semibold text-foreground">Dashboard</h2>
+        <h2 className="text-xl font-semibold text-foreground font-sans">Dashboard</h2>
       </div>
 
       <div className="flex items-center gap-3">
@@ -15,7 +15,7 @@ export function Header() {
           <input
             type="text"
             placeholder="Search evaluations..."
-            className="h-10 w-64 rounded-lg border border-input bg-background pl-10 pr-4 text-sm placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+            className="h-9 w-64 rounded-md border border-input bg-background pl-10 pr-4 text-sm placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
           />
         </div>
 
@@ -28,7 +28,7 @@ export function Header() {
         </Button>
 
         {/* New Evaluation */}
-        <Button variant="gradient" className="gap-2">
+        <Button className="gap-2">
           <Plus className="h-4 w-4" />
           New Evaluation
         </Button>

@@ -64,7 +64,7 @@ const taxonomiesData: Record<string, TaxonomyData> = {
     name: "Finance",
     description: "Financial operations including invoicing, expense management, and credit analysis",
     icon: DollarSign,
-    iconColor: "bg-emerald-500",
+    iconColor: "bg-primary",
     score: 92,
     trend: "up",
     useCases: [
@@ -89,7 +89,7 @@ const taxonomiesData: Record<string, TaxonomyData> = {
     name: "Human Resources",
     description: "HR operations including candidate screening, onboarding, and leave management",
     icon: Users,
-    iconColor: "bg-blue-500",
+    iconColor: "bg-accent",
     score: 87,
     trend: "up",
     useCases: [
@@ -114,7 +114,7 @@ const taxonomiesData: Record<string, TaxonomyData> = {
     name: "Procurement",
     description: "Procurement workflows including vendor management, PO processing, and contract analysis",
     icon: ShoppingCart,
-    iconColor: "bg-purple-500",
+    iconColor: "bg-chart-5",
     score: 85,
     trend: "stable",
     useCases: [
@@ -138,7 +138,7 @@ const taxonomiesData: Record<string, TaxonomyData> = {
     name: "IT",
     description: "IT service management including ticket handling, access requests, and incident response",
     icon: Monitor,
-    iconColor: "bg-cyan-500",
+    iconColor: "bg-success",
     score: 90,
     trend: "up",
     useCases: [
@@ -162,7 +162,7 @@ const taxonomiesData: Record<string, TaxonomyData> = {
     name: "Legal",
     description: "Legal operations including contract analysis, compliance checks, and document review",
     icon: Scale,
-    iconColor: "bg-amber-500",
+    iconColor: "bg-warning",
     score: 83,
     trend: "down",
     useCases: [

@@ -2,86 +2,98 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:wght@500;600;700&display=swap');
 
 @layer base {
   :root {
+    /* Pipefy Design System Colors */
     --background: 210 20% 98%;
-    --foreground: 215 25% 15%;
+    --foreground: 222 47% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 215 25% 15%;
+    --card-foreground: 222 47% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 15%;
+    --popover-foreground: 222 47% 11%;
 
-    --primary: 199 89% 48%;
+    /* Pipefy Blue #2D6CDF */
+    --primary: 220 70% 53%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 16% 93%;
-    --secondary-foreground: 215 25% 25%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 222 47% 20%;
 
-    --muted: 210 14% 96%;
-    --muted-foreground: 215 15% 50%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
 
-    --accent: 173 58% 39%;
+    /* Pipefy Teal #00A39E */
+    --accent: 178 100% 32%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 72% 51%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
+    /* Pipefy Green #22C55E */
     --success: 142 71% 45%;
     --success-foreground: 0 0% 100%;
 
+    /* Pipefy Orange #F59E0B */
     --warning: 38 92% 50%;
     --warning-foreground: 0 0% 100%;
 
-    --border: 214 20% 90%;
-    --input: 214 20% 90%;
-    --ring: 199 89% 48%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 220 70% 53%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
-    --sidebar-background: 215 25% 15%;
-    --sidebar-foreground: 210 14% 96%;
-    --sidebar-primary: 199 89% 48%;
+    /* Pipefy Sidebar - Clean White */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 222 47% 11%;
+    --sidebar-primary: 220 70% 53%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 215 25% 22%;
-    --sidebar-accent-foreground: 210 14% 96%;
-    --sidebar-border: 215 25% 25%;
-    --sidebar-ring: 199 89% 48%;
+    --sidebar-accent: 220 14% 96%;
+    --sidebar-accent-foreground: 222 47% 11%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 220 70% 53%;
+
+    /* Chart colors - Pipefy palette */
+    --chart-1: 220 70% 53%;
+    --chart-2: 142 71% 45%;
+    --chart-3: 178 100% 32%;
+    --chart-4: 38 92% 50%;
+    --chart-5: 280 67% 60%;
 
     /* Custom tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(199, 89%, 48%), hsl(173, 58%, 39%));
-    --gradient-card: linear-gradient(180deg, hsl(0, 0%, 100%), hsl(210, 20%, 98%));
-    --shadow-soft: 0 1px 3px hsla(215, 25%, 15%, 0.06), 0 1px 2px hsla(215, 25%, 15%, 0.04);
-    --shadow-card: 0 4px 6px -1px hsla(215, 25%, 15%, 0.07), 0 2px 4px -2px hsla(215, 25%, 15%, 0.05);
-    --shadow-elevated: 0 10px 15px -3px hsla(215, 25%, 15%, 0.08), 0 4px 6px -4px hsla(215, 25%, 15%, 0.05);
+    --shadow-soft: 0 1px 2px hsla(222, 47%, 11%, 0.05);
+    --shadow-card: 0 1px 3px hsla(222, 47%, 11%, 0.08), 0 1px 2px hsla(222, 47%, 11%, 0.04);
+    --shadow-elevated: 0 4px 6px -1px hsla(222, 47%, 11%, 0.08), 0 2px 4px -2px hsla(222, 47%, 11%, 0.04);
+    --shadow-card-hover: 0 4px 12px hsla(220, 70%, 53%, 0.12);
   }
 
   .dark {
-    --background: 215 25% 10%;
-    --foreground: 210 14% 96%;
+    --background: 222 47% 8%;
+    --foreground: 210 20% 98%;
 
-    --card: 215 25% 13%;
-    --card-foreground: 210 14% 96%;
+    --card: 222 47% 11%;
+    --card-foreground: 210 20% 98%;
 
-    --popover: 215 25% 13%;
-    --popover-foreground: 210 14% 96%;
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 20% 98%;
 
-    --primary: 199 89% 55%;
-    --primary-foreground: 215 25% 10%;
+    --primary: 220 70% 60%;
+    --primary-foreground: 222 47% 8%;
 
-    --secondary: 215 25% 20%;
-    --secondary-foreground: 210 14% 90%;
+    --secondary: 222 47% 16%;
+    --secondary-foreground: 210 20% 90%;
 
-    --muted: 215 25% 18%;
-    --muted-foreground: 215 15% 60%;
+    --muted: 222 47% 14%;
+    --muted-foreground: 220 9% 60%;
 
-    --accent: 173 58% 45%;
+    --accent: 178 100% 40%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 72% 55%;
+    --destructive: 0 84% 65%;
     --destructive-foreground: 0 0% 100%;
 
     --success: 142 71% 50%;
@@ -90,18 +102,24 @@
     --warning: 38 92% 55%;
     --warning-foreground: 0 0% 100%;
 
-    --border: 215 25% 22%;
-    --input: 215 25% 22%;
-    --ring: 199 89% 55%;
+    --border: 222 47% 18%;
+    --input: 222 47% 18%;
+    --ring: 220 70% 60%;
 
-    --sidebar-background: 215 28% 8%;
-    --sidebar-foreground: 210 14% 96%;
-    --sidebar-primary: 199 89% 55%;
-    --sidebar-primary-foreground: 215 25% 10%;
-    --sidebar-accent: 215 25% 15%;
-    --sidebar-accent-foreground: 210 14% 96%;
-    --sidebar-border: 215 25% 18%;
-    --sidebar-ring: 199 89% 55%;
+    --sidebar-background: 222 47% 6%;
+    --sidebar-foreground: 210 20% 98%;
+    --sidebar-primary: 220 70% 60%;
+    --sidebar-primary-foreground: 222 47% 8%;
+    --sidebar-accent: 222 47% 12%;
+    --sidebar-accent-foreground: 210 20% 98%;
+    --sidebar-border: 222 47% 16%;
+    --sidebar-ring: 220 70% 60%;
+
+    --chart-1: 220 70% 60%;
+    --chart-2: 142 71% 50%;
+    --chart-3: 178 100% 40%;
+    --chart-4: 38 92% 55%;
+    --chart-5: 280 67% 65%;
   }
 }
 
@@ -111,14 +129,18 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply bg-background text-foreground antialiased;
     font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Source Serif 4', Georgia, serif;
   }
 }
 
 @layer utilities {
-  .gradient-primary {
-    background: var(--gradient-primary);
+  .font-display {
+    font-family: 'Source Serif 4', Georgia, serif;
   }
 
   .shadow-soft {
@@ -131,6 +153,10 @@
 
   .shadow-elevated {
     box-shadow: var(--shadow-elevated);
+  }
+
+  .shadow-card-hover {
+    box-shadow: var(--shadow-card-hover);
   }
 
   .animate-fade-in {
